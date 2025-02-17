@@ -65,7 +65,7 @@ function createTask() {
 
 function readTasks() {
     if (tasks.length === 0) {
-        console.log("No tasks available.");
+        console.log("No tasks available...!");
     } else {
         tasks.forEach(task => {
             console.log(`<-------------- Task ID: ${task.id}, Name: ${task.name}, Description: ${task.description} -------------->`);
@@ -79,7 +79,7 @@ function updateTask() {
         id = parseInt(id);
         const task = tasks.find(task => task.id === id);
         if (!task) {
-            console.log("Task not found.");
+            console.log("Task not found...!");
             return mainMenu();
         }
         rl.question("Enter new name: ", name => {
@@ -98,7 +98,7 @@ function deleteTask() {
         id = parseInt(id);
         const index = tasks.findIndex(task => task.id === id);
         if (index === -1) {
-            console.log("Task not found.");
+            console.log("Task not found...!");
         } else {
             tasks.splice(index, 1);
             console.log("Task deleted successfully!");
