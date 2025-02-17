@@ -52,6 +52,7 @@ function mainMenu() {
     });
 }
 
+// To Create a Task
 function createTask() {
     rl.question("Enter task name: ", (name) => {
         rl.question("Enter task description: ", (description) => {
@@ -62,15 +63,17 @@ function createTask() {
     });
 }
 
+// To Read a Task...
 function readTasks() {
     if (tasks.length === 0) {
-        console.log("No tasks available.");
+        console.log("No tasks available...!");
     } else {
         tasks.forEach(task => console.log(task.toString()));
     }
     mainMenu();
 }
 
+// To Update a Task...
 function updateTask() {
     rl.question("Enter Task ID to update: ", (id) => {
         id = parseInt(id);
@@ -91,6 +94,7 @@ function updateTask() {
     });
 }
 
+// To delete a Task...
 function deleteTask() {
     rl.question("Enter Task ID to delete: ", (id) => {
         id = parseInt(id);
