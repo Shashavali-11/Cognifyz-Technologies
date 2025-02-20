@@ -5,15 +5,18 @@ const FILE_NAME = 'tasks.json';
 let tasks = [];
 let taskIdCounter = 1;
 
+// To read input from console as rl
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
+//  To save Tasks in tasks.json file
 function saveTasks() {
     fs.writeFileSync(FILE_NAME, JSON.stringify(tasks, null, 2), 'utf8');
 }
 
+//  To read tasks if there data is present or not  
 function loadTasks() {
     if (fs.existsSync(FILE_NAME)) {
         try {
@@ -28,6 +31,7 @@ function loadTasks() {
     }
 }
 
+//  To do which type of Function
 function mainMenu() {
     console.log("\nTask Manager");
     console.log("1. Create Task");
@@ -53,16 +57,32 @@ function mainMenu() {
     });
 }
 
+//  Creayting a Task in a tasks.json file
 function createTask() {
     rl.question("Enter task name: ", name => {
-        rl.question("Enter task description: ", description => {
-            tasks.push({ id: taskIdCounter++, name, description });
-            console.log("Task added successfully!");
-            mainMenu();
-        });
+        if(name){
+            
+            rl.question("Enter task description: ", description => {
+                if(!description){
+                    console.log("You didn't Enter Description re-create task ...!")
+                    createTask();
+
+                }else{
+                    tasks.push({ id: taskIdCounter++, name, description });
+                    console.log("Task added successfully!");
+                    mainMenu()
+
+                }
+            });
+
+        }else {
+            console.log("You didn't enter task Name so, please enter task name...!");
+            createTask();
+        }
     });
 }
 
+// To Read a Task from a tasks.json file
 function readTasks() {
     if (tasks.length === 0) {
         console.log("No tasks available...!");
@@ -74,6 +94,7 @@ function readTasks() {
     mainMenu();
 }
 
+// To Update a Task in a tasks.json file
 function updateTask() {
     rl.question("Enter Task ID to update: ", id => {
         id = parseInt(id);
@@ -93,6 +114,7 @@ function updateTask() {
     });
 }
 
+// To delete a task in a tasks.json file
 function deleteTask() {
     rl.question("Enter Task ID to delete: ", id => {
         id = parseInt(id);
